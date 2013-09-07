@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.template</groupId>
+    <artifactId>app-settings</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>7.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>org.eclipse.persistence.jpa</artifactId>
+                <version>2.5.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-servlet-core</artifactId>
+                <version>${project.dependencies.jersey.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-json-processing</artifactId>
+                <version>${project.dependencies.jersey.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.5</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.0.13</version>
+                <type>jar</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.dependencies.jersey.version>2.2</project.dependencies.jersey.version>
+        <project.javaVersion>1.7</project.javaVersion>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>local-dev-server</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!--String which will be used for names of JDBC sources, domain names and other-->
+                <!--todo set nameseed-->
+                <project.settings.nameseed>javaeetemplate</project.settings.nameseed>
+                <!--EAR settings-->
+                <project.settings.ear.applicationName>${project.settings.nameseed}</project.settings.ear.applicationName>
+                <project.settings.ear.finalName>${project.settings.nameseed}-${project.version}</project.settings.ear.finalName>
+                <!--Log settings-->
+                <!--todo set path to folder where log files should be stored-->
+                <project.settings.logger.folder>/***/logs</project.settings.logger.folder>
+                <project.settings.logger.logback.level>TRACE</project.settings.logger.logback.level>
+                <!--DB settings-->
+                <!--todo set databaseName user password-->
+                <project.settings.jdbc.serverName>localhost</project.settings.jdbc.serverName>
+                <project.settings.jdbc.portNumber>3306</project.settings.jdbc.portNumber>
+                <project.settings.jdbc.databaseName>javaee-db</project.settings.jdbc.databaseName>
+                <project.settings.jdbc.user>javaee-user</project.settings.jdbc.user>
+                <project.settings.jdbc.password>qwerty</project.settings.jdbc.password>
+                <project.settings.jdbc.driver>com.mysql.jdbc.Driver</project.settings.jdbc.driver>
+                <project.settings.jdbc.url>jdbc:mysql://${project.settings.jdbc.serverName}:${project.settings.jdbc.portNumber}/${project.settings.jdbc.databaseName}?useUnicode=yes;characterEncoding=UTF-8;</project.settings.jdbc.url>
+                <!--GlassFish datasource-->
+                <project.settings.jdbc.dataSource.name>jdbc/${project.settings.nameseed}-datasource</project.settings.jdbc.dataSource.name>
+                <project.settings.jdbc.dataSource.poolName>${project.settings.nameseed}-pool</project.settings.jdbc.dataSource.poolName>
+                <project.settings.jdbc.dataSource.description>${project.settings.nameseed} JDBC Connection Pool</project.settings.jdbc.dataSource.description>
+                <!--persistence settings-->
+                <!--todo change ddlgeneration scheme if you need-->
+                <project.settings.jdbc.jta.datasource>${project.settings.jdbc.dataSource.name}</project.settings.jdbc.jta.datasource>
+                <project.settings.jdbc.eclipselink.ddlgeneration>drop-and-create-tables</project.settings.jdbc.eclipselink.ddlgeneration>
+                <!--Glassfish deployment settings-->
+                <!--todo set path to glassfish4 folder-->
+                <project.settings.glassfish.host>localhost</project.settings.glassfish.host>
+                <project.settings.glassfish.homeDir>/***/glassfish4/glassfish</project.settings.glassfish.homeDir>
+                <project.settings.glassfish.domainName>${project.settings.nameseed}-domain</project.settings.glassfish.domainName>
+                <project.settings.glassfish.username>admin</project.settings.glassfish.username>
+                <project.settings.glassfish.passwordFile>${project.settings.glassfish.homeDir}/domains/glassfishpass</project.settings.glassfish.passwordFile>
+                <project.settings.glassfish.adminPort>7048</project.settings.glassfish.adminPort>
+                <project.settings.glassfish.httpPort>7080</project.settings.glassfish.httpPort>
+                <project.settings.glassfish.httpsPort>7043</project.settings.glassfish.httpsPort>
+                <project.settings.glassfish.jmsPort>7076</project.settings.glassfish.jmsPort>
+                <project.settings.glassfish.iiopPort>7037</project.settings.glassfish.iiopPort>
+                <project.settings.glassfish.iiopSslPort>7020</project.settings.glassfish.iiopSslPort>
+                <project.settings.glassfish.iiopMutualauthPort>7021</project.settings.glassfish.iiopMutualauthPort>
+                <project.settings.glassfish.jmxAdminPort>7086</project.settings.glassfish.jmxAdminPort>
+                <project.settings.glassfish.osgiShellPort>7066</project.settings.glassfish.osgiShellPort>
+                <project.settings.glassfish.javaDebuggerPort>9009</project.settings.glassfish.javaDebuggerPort>
+                <!--Application settings-->
+                <project.settings.app.NamePrefix>Mr.</project.settings.app.NamePrefix>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>${project.javaVersion}</source>
+                        <target>${project.javaVersion}</target>
+                        <compilerArgument>-Xlint:all</compilerArgument>
+                        <showWarnings>true</showWarnings>
+                        <showDeprecation>true</showDeprecation>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.8</version>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                        <overWriteSnapshots>true</overWriteSnapshots>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>copy-dependencies</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ejb-plugin</artifactId>
+                    <version>2.3</version>
+                    <configuration>
+                        <ejbVersion>3.1</ejbVersion>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+                        <!--All libs included in the EAR file-->
+                        <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>2.8</version>
+                    <configuration>
+                        <defaultLibBundleDir>lib</defaultLibBundleDir>
+                        <initializeInOrder>true</initializeInOrder>
+                        <generateApplicationXml>true</generateApplicationXml>
+                        <version>6</version>
+                        <applicationName>${project.settings.ear.applicationName}</applicationName>
+                        <displayName>${project.settings.ear.finalName}</displayName>
+                        <finalName>${project.settings.ear.finalName}</finalName>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.glassfish.maven.plugin</groupId>
+                    <artifactId>maven-glassfish-plugin</artifactId>
+                    <version>2.1</version>
+                    <configuration>
+                        <glassfishDirectory>${project.settings.glassfish.homeDir}</glassfishDirectory>
+                        <user>${project.settings.glassfish.username}</user>
+                        <passwordFile>${project.settings.glassfish.passwordFile}</passwordFile>
+                        <autoCreate>true</autoCreate>
+                        <debug>true</debug>
+                        <echo>true</echo>
+                        <terse>true</terse>
+                        <domain>
+                            <host>${project.settings.glassfish.host}</host>
+                            <name>${project.settings.glassfish.domainName}</name>
+                            <adminPort>${project.settings.glassfish.adminPort}</adminPort>
+                            <httpPort>${project.settings.glassfish.httpPort}</httpPort>
+                            <httpsPort>${project.settings.glassfish.httpsPort}</httpsPort>
+                            <iiopPort>${project.settings.glassfish.iiopPort}</iiopPort>
+                            <jmsPort>${project.settings.glassfish.jmsPort}</jmsPort>
+                            <resources>
+                                <jdbcDataSource>
+                                    <name>${project.settings.jdbc.dataSource.name}</name>
+                                    <type>connectionPoolDataSource</type>
+                                    <poolName>${project.settings.jdbc.dataSource.poolName}</poolName>
+                                    <className>com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource</className>
+                                    <description>${project.settings.jdbc.dataSource.description}</description>
+                                    <allowNonComponentCallers>false</allowNonComponentCallers>
+                                    <validateConnections>true</validateConnections>
+                                    <validationMethod>metaData</validationMethod>
+                                    <properties>
+                                        <property>
+                                            <name>serverName</name>
+                                            <value>${project.settings.jdbc.serverName}</value>
+                                        </property>
+                                        <property>
+                                            <name>portNumber</name>
+                                            <value>${project.settings.jdbc.portNumber}</value>
+                                        </property>
+                                        <property>
+                                            <name>databaseName</name>
+                                            <value>${project.settings.jdbc.databaseName}</value>
+                                        </property>
+                                        <property>
+                                            <name>user</name>
+                                            <value>${project.settings.jdbc.user}</value>
+                                        </property>
+                                        <property>
+                                            <name>password</name>
+                                            <value>${project.settings.jdbc.password}</value>
+                                        </property>
+                                    </properties>
+                                </jdbcDataSource>
+                            </resources>
+                        </domain>
+                        <components>
+                            <component>
+                                <name>${project.settings.ear.applicationName}</name>
+                                <artifact>${project.build.directory}/${project.settings.ear.finalName}.ear</artifact>
+                            </component>
+                        </components>
+                    </configuration>
+                    <dependencies>
+                        <!--repo not response-->
+                        <dependency>
+                            <groupId>au.net.ocean.maven.plugin</groupId>
+                            <artifactId>maven-plugin</artifactId>
+                            <version>1.0</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>org.apache.maven</groupId>
+                                    <artifactId>maven-plugin-api</artifactId>
+                                </exclusion>
+                            </exclusions>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.apache.maven</groupId>
+                            <artifactId>maven-plugin-api</artifactId>
+                            <version>2.0</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <!--Filtering resources. Insert properties values into the resource files-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>

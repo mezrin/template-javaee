@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+<persistence-unit name="MainPersistenceUnit">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>${project.settings.jdbc.dataSource.name}</jta-data-source>
+    <!--//todo list all DB Model classes-->
+    <class>org.template.model.User</class>
+    <properties>
+        <property name="javax.persistence.jdbc.driver" value="${project.settings.jdbc.driver}"/>
+        <property name="javax.persistence.jdbc.url" value="${project.settings.jdbc.url}"/>
+        <property name="javax.persistence.jdbc.user" value="${project.settings.jdbc.user}"/>
+        <property name="javax.persistence.jdbc.password" value="${project.settings.jdbc.password}"/>
+        <property name="eclipselink.ddl-generation" value="${project.settings.jdbc.eclipselink.ddlgeneration}"/>
+    </properties>
+</persistence-unit>
+</persistence>
