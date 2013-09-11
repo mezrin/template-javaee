@@ -1,18 +1,11 @@
 package org.template.rest.model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * @author Victor Mezrin
  */
-@XmlRootElement
 public class RequestNewUser {
 
-    @XmlElement
     String firstName;
-
-    @XmlElement
     String lastName;
 
     public String getFirstName() {
