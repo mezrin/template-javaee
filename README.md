@@ -21,6 +21,8 @@ To apply template you need:
 - check all //todo
 - create file "glassfishpass"
 - create database and database user
+- set configuration in pom.xml of module app-config
+- download and put to the GF4.0 folder "/.../glassfish4/glassfish/lib" newest MySQL connector
 - execute "mvn package" inside folder "app-aggreagtor"
 - execute "mvn glassfish:create-domain" inside folder "app-ear"
 - execute "mvn glassfish:start-domain" inside folder "app-ear"
