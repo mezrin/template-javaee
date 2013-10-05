@@ -31,7 +31,7 @@ To apply template you need:
 If you use IntelliJ IDEA you need to setup JPA for module "controller":
 - open project settings
 - add facet "JPA" to the module "controller"
-- configure new facet: add "persistence.xml" from the module "model"
+- configure new facet: add "persistence.xml" from the module "app-config"
 
 
 # How to
