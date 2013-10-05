@@ -12,6 +12,16 @@
         <property name="javax.persistence.jdbc.user" value="${project.settings.jdbc.user}"/>
         <property name="javax.persistence.jdbc.password" value="${project.settings.jdbc.password}"/>
         <property name="eclipselink.ddl-generation" value="${project.settings.jdbc.eclipselink.ddlgeneration}"/>
+
+        <property name="eclipselink.logging.logger" value="ServerLogger"/>
+        <property name="eclipselink.logging.file" value="${project.settings.jdbc.eclipselink.logger.file}"/>
+        <property name="eclipselink.logging.level" value="${project.settings.jdbc.eclipselink.logger.level}"/>
+        <property name="eclipselink.logging.level.sql" value="${project.settings.jdbc.eclipselink.logger.level}"/>
+        <property name="eclipselink.logging.parameters" value="true"/>
+        <property name="eclipselink.logging.timestamp" value="true"/>
+        <property name="eclipselink.logging.session" value="true"/>
+        <property name="eclipselink.logging.thread" value="true"/>
+        <property name="eclipselink.logging.exceptions" value="true"/>
     </properties>
 </persistence-unit>
 </persistence>

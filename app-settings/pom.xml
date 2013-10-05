@@ -89,6 +89,9 @@
                 <!--todo change ddlgeneration scheme if you need-->
                 <project.settings.jdbc.jta.datasource>${project.settings.jdbc.dataSource.name}</project.settings.jdbc.jta.datasource>
                 <project.settings.jdbc.eclipselink.ddlgeneration>drop-and-create-tables</project.settings.jdbc.eclipselink.ddlgeneration>
+                <!--EclipseLink logging-->
+                <project.settings.jdbc.eclipselink.logger.file>${project.settings.logger.folder}/eclipseLinkLogs</project.settings.jdbc.eclipselink.logger.file>
+                <project.settings.jdbc.eclipselink.logger.level>FINE</project.settings.jdbc.eclipselink.logger.level>
                 <!--Glassfish deployment settings-->
                 <!--todo set path to glassfish4 folder-->
                 <project.settings.glassfish.host>localhost</project.settings.glassfish.host>
