@@ -4,7 +4,7 @@
     <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
 
     <appender name="HTMLFILE" class="ch.qos.logback.core.FileAppender">
-        <file>${project.settings.logger.folder}/${bySecond}-grabberlog.html</file>
+        <file>${project.settings.logger.folder}/${bySecond}-${project.settings.nameseed}.html</file>
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <layout class="ch.qos.logback.classic.html.HTMLLayout">
                 <pattern>%date%thread%level%class%method%file%line%message</pattern>
