@@ -1,3 +1,5 @@
+#!/bin/sh
+
 #--------------------------------------------------------------------------------------------------------------
 #----- Deployment from scratch
 #----- Used to deploy app on remote server. For dev local server, please, use maven-glassfish-plugin
