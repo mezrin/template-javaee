@@ -20,8 +20,8 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastEditDate;
 
-    String firstName;
-    String lastName;
+    private String firstName;
+    private String lastName;
 
 
     public Long getId() {
